@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import CoreData
 
 class ViewController: UIViewController {
 
@@ -13,7 +15,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+    @IBAction func logOutPressed(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.dismiss(animated: true)
+        } catch {
+            print("Sign out error")
+        }
+    }
+    
 }
 
