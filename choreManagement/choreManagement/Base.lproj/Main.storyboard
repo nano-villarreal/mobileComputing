@@ -73,6 +73,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pff-cr-JaO"/>
+                                    <segue destination="Ixe-Sc-fF1" kind="presentation" identifier="loginSegue" id="9VQ-dU-eEl"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ix-r4-Ibf">
@@ -95,17 +96,16 @@
                         <outlet property="loginSegCtrl" destination="52p-bM-ICB" id="Ln2-Hj-yx2"/>
                         <outlet property="passwordField" destination="bjc-Yf-fhB" id="wvU-Ev-BnB"/>
                         <outlet property="userIDField" destination="ePl-fw-VH4" id="ZeM-dy-BGn"/>
-                        <segue destination="Ixe-Sc-fF1" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="Nqf-kp-WHZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1090.7692307692307" y="3.5545023696682461"/>
+            <point key="canvasLocation" x="1108" y="4"/>
         </scene>
         <!--ViewController-->
         <scene sceneID="oYT-3H-eNF">
             <objects>
-                <viewController title="ViewController" id="KrD-Ke-cCu" customClass="ViewController" customModule="choreManagement" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="ViewController" id="KrD-Ke-cCu" customClass="ViewController" customModule="choreManagement" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cqQ-V7-a8M">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,11 +149,33 @@
                                     <action selector="logOutPressed:" destination="KrD-Ke-cCu" eventType="touchUpInside" id="Gsn-vk-E2N"/>
                                 </connections>
                             </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-pf-2cI">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TcN-eO-ZEE">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlW-Qn-r1e">
+                                            <rect key="frame" x="93" y="390" width="203" height="64"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="52"/>
+                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="i2D-gF-fdY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="YOF-sB-iCX"/>
+                    <connections>
+                        <outlet property="visualEffectView" destination="B4M-pf-2cI" id="yto-9e-0Xg"/>
+                        <outlet property="welcomeLabel" destination="mlW-Qn-r1e" id="nEw-e4-Zol"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7q4-99-Xba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -194,7 +216,7 @@
         <!--Navigation Controller-->
         <scene sceneID="vxH-pc-x44">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ixe-Sc-fF1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Ixe-Sc-fF1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eKZ-nd-Z7R">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
@@ -207,12 +229,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9M1-Mx-L7P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1887.6923076923076" y="3.5545023696682461"/>
+            <point key="canvasLocation" x="2005" y="4"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
