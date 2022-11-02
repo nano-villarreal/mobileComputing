@@ -73,7 +73,6 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pff-cr-JaO"/>
-                                    <segue destination="Ixe-Sc-fF1" kind="presentation" identifier="loginSegue" id="9VQ-dU-eEl"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ix-r4-Ibf">
@@ -96,6 +95,7 @@
                         <outlet property="loginSegCtrl" destination="52p-bM-ICB" id="Ln2-Hj-yx2"/>
                         <outlet property="passwordField" destination="bjc-Yf-fhB" id="wvU-Ev-BnB"/>
                         <outlet property="userIDField" destination="ePl-fw-VH4" id="ZeM-dy-BGn"/>
+                        <segue destination="Ixe-Sc-fF1" kind="presentation" identifier="loginSegue" id="mer-B8-yMD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

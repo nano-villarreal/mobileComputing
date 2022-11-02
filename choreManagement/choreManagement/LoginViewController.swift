@@ -39,6 +39,7 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 self.userIDField.text = nil
                 self.passwordField.text = nil
+                self.confirmPasswordField.text = nil
             }
         }
     }

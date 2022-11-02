@@ -11,8 +11,7 @@ import CoreData
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var visualEffectView: UIVisualEffectView!
-    
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!    
     @IBOutlet weak var welcomeLabel: UILabel!
     
     override func viewDidLoad() {
