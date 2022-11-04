@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7DF73AC9290C873A000479C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DF73AC8290C8739000479C1 /* GoogleService-Info.plist */; };
+		7D4B985B29157F5D00743416 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4B985A29157F5D00743416 /* GoogleService-Info.plist */; };
 		7DF73ACC290C8809000479C1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7DF73ACB290C8809000479C1 /* FirebaseAuth */; };
 		7DF73ACE290C928B000479C1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF73ACD290C928B000479C1 /* LoginViewController.swift */; };
 		97274C032909CEDB00FBE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97274C022909CEDB00FBE620 /* AppDelegate.swift */; };
@@ -40,7 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7DF73AC8290C8739000479C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7D4B985A29157F5D00743416 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DF73ACD290C928B000479C1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		97274BFF2909CEDB00FBE620 /* choreManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = choreManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97274C022909CEDB00FBE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 				97274C082909CEDB00FBE620 /* Main.storyboard */,
 				97274C0E2909CEDD00FBE620 /* Assets.xcassets */,
 				97274C102909CEDD00FBE620 /* LaunchScreen.storyboard */,
-				7DF73AC8290C8739000479C1 /* GoogleService-Info.plist */,
+				7D4B985A29157F5D00743416 /* GoogleService-Info.plist */,
 				97274C132909CEDD00FBE620 /* Info.plist */,
 				97274C0B2909CEDB00FBE620 /* choreManagement.xcdatamodeld */,
 			);
@@ -249,7 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97274C122909CEDD00FBE620 /* LaunchScreen.storyboard in Resources */,
-				7DF73AC9290C873A000479C1 /* GoogleService-Info.plist in Resources */,
+				7D4B985B29157F5D00743416 /* GoogleService-Info.plist in Resources */,
 				97274C0F2909CEDD00FBE620 /* Assets.xcassets in Resources */,
 				97274C0A2909CEDB00FBE620 /* Main.storyboard in Resources */,
 			);
