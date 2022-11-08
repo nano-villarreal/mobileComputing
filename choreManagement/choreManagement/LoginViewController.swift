@@ -7,8 +7,11 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class LoginViewController: UIViewController {
+    
+    var db: Firestore!
 
     @IBOutlet weak var userIDField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -88,6 +91,18 @@ class LoginViewController: UIViewController {
                 }
             } else {
                 self.errorMessage.text = "Passwords do not match"
+            }
+            
+            db.collection("users").document("\(userIDField.text!)").setData([
+                "username": "\(userIDField.text!)",
+                "password": "\(passwordField.text!)",
+                "rooms": []
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
             }
             
         }
