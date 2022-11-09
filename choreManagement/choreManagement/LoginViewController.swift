@@ -8,10 +8,11 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class LoginViewController: UIViewController {
     
-    var db: Firestore!
+    let db = Firestore.firestore()
 
     @IBOutlet weak var userIDField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
