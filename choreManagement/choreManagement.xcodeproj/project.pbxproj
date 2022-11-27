@@ -117,13 +117,13 @@
 				97274C042909CEDB00FBE620 /* SceneDelegate.swift */,
 				97274C062909CEDB00FBE620 /* ViewController.swift */,
 				7DF73ACD290C928B000479C1 /* LoginViewController.swift */,
+				7D4AC687291C5FB5002631F9 /* SettingsViewController.swift */,
 				97274C082909CEDB00FBE620 /* Main.storyboard */,
 				97274C0E2909CEDD00FBE620 /* Assets.xcassets */,
 				97274C102909CEDD00FBE620 /* LaunchScreen.storyboard */,
 				7D4B985A29157F5D00743416 /* GoogleService-Info.plist */,
 				97274C132909CEDD00FBE620 /* Info.plist */,
 				97274C0B2909CEDB00FBE620 /* choreManagement.xcdatamodeld */,
-				7D4AC687291C5FB5002631F9 /* SettingsViewController.swift */,
 			);
 			path = choreManagement;
 			sourceTree = "<group>";

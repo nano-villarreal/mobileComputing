@@ -46,6 +46,7 @@ class LoginViewController: UIViewController {
                 self.confirmPasswordField.text = nil
             }
         }
+        
     }
     
     @IBAction func loginSegPressed(_ sender: Any) {
@@ -97,7 +98,10 @@ class LoginViewController: UIViewController {
             db.collection("users").document("\(userIDField.text!)").setData([
                 "username": "\(userIDField.text!)",
                 "password": "\(passwordField.text!)",
-                "rooms": []
+                "rooms": [],
+                "fontSize": "10",
+                "darkOn": "false",
+                "notiOn": "true"
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
