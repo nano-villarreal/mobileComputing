@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -245,16 +245,10 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="blP-Tr-Ymo">
                                 <rect key="frame" x="257" y="193" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgf-Ob-G14">
-                                <rect key="frame" x="165" y="539" width="61" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
                                 <connections>
-                                    <action selector="savePressed:" destination="2QX-MF-9cA" eventType="touchUpInside" id="TkF-aZ-bl0"/>
+                                    <action selector="darkModeSwitched:" destination="2QX-MF-9cA" eventType="valueChanged" id="sY6-5r-ZmB"/>
                                 </connections>
-                            </button>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CCx-8j-aUE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -263,11 +257,11 @@
                     <connections>
                         <outlet property="darkModeLabel" destination="m1F-Ii-KcW" id="4ds-XU-NlK"/>
                         <outlet property="darkModeSwitch" destination="blP-Tr-Ymo" id="cmP-H8-pHE"/>
+                        <outlet property="darkSwitch" destination="blP-Tr-Ymo" id="Y7W-aO-6G4"/>
                         <outlet property="fontSizeSlider" destination="h51-R1-dhh" id="OqO-ig-LNA"/>
                         <outlet property="fontSliderLabel" destination="uOY-Vz-PIB" id="OSR-BQ-BIg"/>
                         <outlet property="notiLabel" destination="mjf-pL-w4P" id="p4A-BL-lnH"/>
                         <outlet property="notificationsSwitch" destination="NrM-Hu-HKu" id="Emn-35-z8A"/>
-                        <outlet property="saveButton" destination="Mgf-Ob-G14" id="0AS-O0-xw0"/>
                         <outlet property="settingsLabel" destination="IE2-U6-drm" id="F5w-vy-CsY"/>
                     </connections>
                 </viewController>

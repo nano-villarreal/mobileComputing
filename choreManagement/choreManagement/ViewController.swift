@@ -20,6 +20,8 @@ class ViewController: UIViewController{
     let email: String = (Auth.auth().currentUser?.email)!
     
     var fontSize: CGFloat!
+    
+    var darkOn: String!
 
     @IBOutlet weak var visualEffectView: UIVisualEffectView!    
     @IBOutlet weak var welcomeLabel: UILabel!
@@ -66,6 +68,11 @@ class ViewController: UIViewController{
                             self.fontSize = CGFloat(Int(fontFloat))
                             self.updateFonts()
                         }
+                        
+                        if let darkValue = (data["darkOn"] as? NSString){
+                            self.darkOn = String(darkValue)
+                            self.updateScreen()
+                        }
                     }
                 }
         }
@@ -80,7 +87,7 @@ class ViewController: UIViewController{
     }
     
     func scheduledTimerWithTimeInterval(){
-        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.newFonts), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.newSettings), userInfo: nil, repeats: true)
     }
     
     func animateOut() {
@@ -100,7 +107,7 @@ class ViewController: UIViewController{
         }
     }
     
-    @objc func newFonts(){
+    @objc func newSettings(){
         let docRef = db.collection("users").document("\(email)")
         
         docRef.getDocument { (document, error) in
@@ -116,6 +123,11 @@ class ViewController: UIViewController{
                             self.fontSize = CGFloat(Int(fontFloat))
                             self.updateFonts()
                         }
+                        
+                        if let darkValue = (data["darkOn"] as? NSString){
+                            self.darkOn = String(darkValue)
+                            self.updateScreen()
+                        }
                     }
                 }
         }
@@ -124,6 +136,23 @@ class ViewController: UIViewController{
     func updateFonts(){
         
         homeLabel.font = homeLabel.font.withSize(CGFloat(homeLabelSize * (fontSize/10)))
+        
+    }
+    
+    func updateScreen(){
+        
+        
+        if (darkOn == "true"){
+            
+            homeLabel.textColor = UIColor.white
+            view.backgroundColor = UIColor.black
+            
+        } else if (darkOn == "false"){
+            
+            homeLabel.textColor = UIColor.black
+            view.backgroundColor = UIColor.white
+
+        }
         
     }
     
