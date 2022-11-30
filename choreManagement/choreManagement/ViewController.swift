@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import CoreData
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var timer = Timer()
     
@@ -23,7 +23,11 @@ class ViewController: UIViewController{
     
     var darkOn: String!
 
-    @IBOutlet weak var visualEffectView: UIVisualEffectView!    
+    var user_rooms_refs: NSArray = []
+    var room_names: [String] = []
+    
+    @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var welcomeLabel: UILabel!
     
     @IBOutlet weak var joinButton: UIButton!
@@ -35,6 +39,11 @@ class ViewController: UIViewController{
     var homeLabelSize: CGFloat!
     var createButtonSize: CGFloat!
     var logOutButtonSize: CGFloat!
+    
+    override func viewWillAppear(_ animated: Bool){
+        myTableView.dataSource = self
+        myTableView.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +177,32 @@ class ViewController: UIViewController{
 
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return room_names.count
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
+        let row = indexPath.row
+        cell.textLabel?.text = "Room Name"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "roomSegue",
+            let destination = segue.destination as? RoomViewController,
+            let operatorIndex = myTableView.indexPathForSelectedRow?.row
+        {
+            //destination.roomLabel = room_names[operatorIndex]
+        }
     }
     
 }

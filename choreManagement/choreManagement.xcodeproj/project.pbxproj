@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		74B7FB5F293739BF00F49C68 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B7FB5E293739BF00F49C68 /* CreateViewController.swift */; };
 		74B7FB61293739D400F49C68 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B7FB60293739D400F49C68 /* JoinViewController.swift */; };
+		74B7FB632937C7E600F49C68 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B7FB622937C7E600F49C68 /* RoomViewController.swift */; };
 		7D1180352919D8A400FBE2F9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7D1180342919D8A400FBE2F9 /* FirebaseAuth */; };
 		7D1180372919D8A400FBE2F9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D1180362919D8A400FBE2F9 /* FirebaseFirestore */; };
 		7D1180392919D8A400FBE2F9 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7D1180382919D8A400FBE2F9 /* FirebaseFirestoreSwift */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		74B7FB5E293739BF00F49C68 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		74B7FB60293739D400F49C68 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		74B7FB622937C7E600F49C68 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		7D4AC687291C5FB5002631F9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7D4B985A29157F5D00743416 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DF73ACD290C928B000479C1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				7D4B985A29157F5D00743416 /* GoogleService-Info.plist */,
 				97274C132909CEDD00FBE620 /* Info.plist */,
 				97274C0B2909CEDB00FBE620 /* choreManagement.xcdatamodeld */,
+				74B7FB622937C7E600F49C68 /* RoomViewController.swift */,
 			);
 			path = choreManagement;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				74B7FB5F293739BF00F49C68 /* CreateViewController.swift in Sources */,
 				97274C0D2909CEDB00FBE620 /* choreManagement.xcdatamodeld in Sources */,
 				7DF73ACE290C928B000479C1 /* LoginViewController.swift in Sources */,
+				74B7FB632937C7E600F49C68 /* RoomViewController.swift in Sources */,
 				97274C052909CEDB00FBE620 /* SceneDelegate.swift in Sources */,
 				7D4AC688291C5FB5002631F9 /* SettingsViewController.swift in Sources */,
 			);
