@@ -272,14 +272,20 @@
         <!--CreateRoomViewController-->
         <scene sceneID="lDO-Hv-I2r">
             <objects>
-                <viewController title="CreateRoomViewController" id="Djd-Au-glD" sceneMemberID="viewController">
+                <viewController title="CreateRoomViewController" id="Djd-Au-glD" customClass="CreateViewController" customModule="choreManagement" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H2p-56-oji">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dc9-13-NJh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="S9l-Vh-cqR"/>
+                    <navigationItem key="navigationItem" id="S9l-Vh-cqR">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape.fill" catalog="system" id="3bU-Vh-VBP">
+                            <connections>
+                                <segue destination="2QX-MF-9cA" kind="show" id="6fd-Ds-J7F"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tUu-YR-Mol" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -288,14 +294,20 @@
         <!--JoinRoomViewController-->
         <scene sceneID="PdM-jt-T91">
             <objects>
-                <viewController title="JoinRoomViewController" id="hRm-Q4-ueh" sceneMemberID="viewController">
+                <viewController title="JoinRoomViewController" id="hRm-Q4-ueh" customClass="JoinViewController" customModule="choreManagement" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tY5-jL-Vhw">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="wkY-CV-cqV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zfS-wf-aA1"/>
+                    <navigationItem key="navigationItem" id="zfS-wf-aA1">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape.fill" catalog="system" id="sU7-Uh-73G">
+                            <connections>
+                                <segue destination="2QX-MF-9cA" kind="show" id="S2e-tB-j4E"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bh7-ye-Y2u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -320,6 +332,9 @@
             <point key="canvasLocation" x="2005" y="4"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="S2e-tB-j4E"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
