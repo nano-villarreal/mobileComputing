@@ -53,6 +53,20 @@ class ViewController: UIViewController{
             self.animateOut()
         }
         
+        DispatchQueue.global(qos: .userInteractive).async {
+            sleep(5)
+            UNUserNotificationCenter.current().requestAuthorization(options:[.alert,.badge,.sound]) {
+                granted, error in
+                if granted {
+                    print("All set!")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+        
+        
         let docRef = db.collection("users").document("\(email)")
         
         docRef.getDocument { (document, error) in
