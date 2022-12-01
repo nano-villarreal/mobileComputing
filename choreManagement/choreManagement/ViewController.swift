@@ -102,7 +102,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         if let roomList = (data["rooms"] as? NSArray){
                             self.user_rooms_refs = roomList
-                            var objCArray = NSMutableArray(array: self.user_rooms_refs)
+                            let objCArray = NSMutableArray(array: self.user_rooms_refs)
 
                             self.room_names = (objCArray as NSArray as? [String])!
                         }
@@ -209,7 +209,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = indexPath.row
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -218,7 +218,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let destination = segue.destination as? RoomViewController,
             let operatorIndex = myTableView.indexPathForSelectedRow?.row
         {
-            //destination.roomLabel = room_names[operatorIndex]
+            destination.roomName = room_names[operatorIndex]
         }
     }
     

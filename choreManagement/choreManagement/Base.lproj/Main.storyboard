@@ -489,6 +489,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Add New Task"/>
+                                <connections>
+                                    <action selector="addTask:" destination="nfj-nQ-KYr" eventType="touchUpInside" id="FF6-m0-NvT"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Uz4-Oh-1KQ">
                                 <rect key="frame" x="67" y="290" width="261" height="468"/>
@@ -528,6 +531,7 @@
                     <connections>
                         <outlet property="myTableView" destination="Uz4-Oh-1KQ" id="Usp-M6-h1h"/>
                         <outlet property="roomLabel" destination="Kp5-kG-Qe4" id="kbU-ce-4GX"/>
+                        <outlet property="taskField" destination="pCF-ot-WOU" id="B5y-eO-nz9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8f-5N-blh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
