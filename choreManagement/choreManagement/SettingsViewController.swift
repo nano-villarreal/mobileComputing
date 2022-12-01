@@ -96,22 +96,14 @@ class SettingsViewController: UIViewController {
         
         
         if (darkOn == "true"){
-            settingsLabel.textColor = UIColor.white
-            notiLabel.textColor = UIColor.white
-            darkModeLabel.textColor = UIColor.white
-            fontSliderLabel.textColor = UIColor.white
             
-            view.backgroundColor = UIColor.black
+            overrideUserInterfaceStyle = .dark
             
             darkSwitch.setOn(true, animated: false)
+            
         } else if (darkOn == "false"){
             
-            settingsLabel.textColor = UIColor.black
-            notiLabel.textColor = UIColor.black
-            darkModeLabel.textColor = UIColor.black
-            fontSliderLabel.textColor = UIColor.black
-            
-            view.backgroundColor = UIColor.white
+            overrideUserInterfaceStyle = .light
             
             darkSwitch.setOn(false, animated: false)
 

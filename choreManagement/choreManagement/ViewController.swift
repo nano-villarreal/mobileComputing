@@ -100,10 +100,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
         }
         
-        joinButtonSize = joinButton.titleLabel?.font.pointSize
+        
         homeLabelSize = homeLabel.font.pointSize
-        createButtonSize = createButton.titleLabel?.font.pointSize
-        logOutButtonSize = logOutButton.titleLabel?.font.pointSize
         
         scheduledTimerWithTimeInterval()
         
@@ -167,13 +165,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if (darkOn == "true"){
             
-            homeLabel.textColor = UIColor.white
-            view.backgroundColor = UIColor.black
-            
+            overrideUserInterfaceStyle = .dark
         } else if (darkOn == "false"){
             
-            homeLabel.textColor = UIColor.black
-            view.backgroundColor = UIColor.white
+            overrideUserInterfaceStyle = .light
 
         }
         

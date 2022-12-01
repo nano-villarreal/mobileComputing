@@ -125,6 +125,7 @@
 				7DF73ACD290C928B000479C1 /* LoginViewController.swift */,
 				74B7FB5E293739BF00F49C68 /* CreateViewController.swift */,
 				74B7FB60293739D400F49C68 /* JoinViewController.swift */,
+				74B7FB622937C7E600F49C68 /* RoomViewController.swift */,
 				7D4AC687291C5FB5002631F9 /* SettingsViewController.swift */,
 				97274C082909CEDB00FBE620 /* Main.storyboard */,
 				97274C0E2909CEDD00FBE620 /* Assets.xcassets */,
@@ -132,7 +133,6 @@
 				7D4B985A29157F5D00743416 /* GoogleService-Info.plist */,
 				97274C132909CEDD00FBE620 /* Info.plist */,
 				97274C0B2909CEDB00FBE620 /* choreManagement.xcdatamodeld */,
-				74B7FB622937C7E600F49C68 /* RoomViewController.swift */,
 			);
 			path = choreManagement;
 			sourceTree = "<group>";
