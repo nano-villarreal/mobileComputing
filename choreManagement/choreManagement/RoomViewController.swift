@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 import CoreData
 
 class RoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var taskField: UITextField!
@@ -106,6 +106,19 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
+        
+        let room: String = roomName
+        let taskRef = db.collection("rooms").document("\(room)")
+        
+        tasks.remove(at: indexPath.row)
+        
+        let tempArray = NSArray(array: tasks)
+        
+        taskRef.setData([
+            "tasks": tempArray
+        ])
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -121,14 +134,13 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
             tasks.append(task)
             
             let tempArray = NSArray(array: tasks)
-
+            
             taskRef.setData([
                 "tasks": tempArray
             ])
-
+            
         }
         
     }
     
-
 }
