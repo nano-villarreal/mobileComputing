@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let email: String = (Auth.auth().currentUser?.email)!
     
-    var fontSize: CGFloat!
+    var fontSize: CGFloat! = 10.0
     
     var darkOn: String!
 
@@ -43,6 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool){
         myTableView.dataSource = self
         myTableView.delegate = self
+        
     }
     
     override func viewDidLoad() {
@@ -90,11 +91,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         if let fontFloat = (data["fontSize"] as? NSString)?.doubleValue {
                             self.fontSize = CGFloat(Int(fontFloat))
                             self.updateFonts()
+                            self.myTableView.reloadData()
                         }
                         
                         if let darkValue = (data["darkOn"] as? NSString){
                             self.darkOn = String(darkValue)
                             self.updateScreen()
+                            self.myTableView.reloadData()
+                        }
+                        
+                        if let roomList = (data["rooms"] as? NSArray){
+                            self.user_rooms_refs = roomList
+                            var objCArray = NSMutableArray(array: self.user_rooms_refs)
+
+                            self.room_names = (objCArray as NSArray as? [String])!
                         }
                     }
                 }
@@ -129,6 +139,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func newSettings(){
+        
         let docRef = db.collection("users").document("\(email)")
         
         docRef.getDocument { (document, error) in
@@ -148,6 +159,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         if let darkValue = (data["darkOn"] as? NSString){
                             self.darkOn = String(darkValue)
                             self.updateScreen()
+                        }
+                        
+                        if let roomList = (data["rooms"] as? NSArray){
+                            self.user_rooms_refs = roomList
+                            let objCArray = NSMutableArray(array: self.user_rooms_refs)
+
+                            self.room_names = (objCArray as NSArray as? [String])!
+                            
+                            self.myTableView.reloadData()
                         }
                     }
                 }
@@ -176,13 +196,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return room_names.count
-        return 5
+        return room_names.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
         let row = indexPath.row
-        cell.textLabel?.text = "Room Name"
+        let roomName = room_names[row]
+        cell.textLabel?.text = "\(roomName)"
+        cell.textLabel?.font = cell.textLabel?.font.withSize(CGFloat(homeLabelSize * (fontSize/10)))
         return cell
     }
     
