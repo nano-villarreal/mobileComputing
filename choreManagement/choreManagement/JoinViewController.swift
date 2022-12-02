@@ -40,11 +40,14 @@ class JoinViewController: UIViewController {
     
     var room_refs: NSArray = []
     var rooms: [String] = []
+    
+    var clicked: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         joinedLabel.isHidden = true
+        passwordField.isSecureTextEntry = true
 
         let docRef = db.collection("users").document("\(email)")
         
@@ -115,7 +118,7 @@ class JoinViewController: UIViewController {
                 }
         }
         
-        if (passwordField.text == checkPW){
+        if (clicked == true) && (passwordField.text == checkPW){
             
             db.collection("users").document("\((Auth.auth().currentUser?.email)!)").getDocument { (document, error) in
                     guard error == nil else {
@@ -151,7 +154,7 @@ class JoinViewController: UIViewController {
             checkPW = ""
             
         }
-        
+        clicked = false
     }
     
     func updateFonts(){
@@ -179,24 +182,27 @@ class JoinViewController: UIViewController {
     
     @IBAction func joinPressed(_ sender: Any) {
         
-        print(rooms)
+        clicked = true
         
-        let docRef = db.collection("rooms").document("\((roomNameField.text)!)")
+        if (roomNameField.text != "") && (passwordField.text != ""){
+            let docRef = db.collection("rooms").document("\((roomNameField.text)!)")
 
-        docRef.getDocument { (document, error) in
-            guard error == nil else {
-                print("error", error ?? "")
-                return
-            }
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
 
-            if let document = document, document.exists {
-                let data = document.data()
-                if let data = data {
-                    if let password = (data["password"] as? String){
-                        self.checkPW = password
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if let password = (data["password"] as? String){
+                            self.checkPW = password
+                        }
                     }
                 }
             }
+
         }
     }
 }

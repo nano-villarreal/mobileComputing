@@ -44,6 +44,9 @@ class CreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        passwordField.isSecureTextEntry = true
+        confirmField.isSecureTextEntry = true
 
         let docRef = db.collection("users").document("\(email)")
         
