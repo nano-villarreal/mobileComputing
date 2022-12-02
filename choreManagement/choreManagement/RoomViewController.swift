@@ -17,11 +17,19 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var taskField: UITextField!
     
+    var roomLabelSize: CGFloat!
+    
     var roomName: String!
     
     var timer = Timer()
     
     let db = Firestore.firestore()
+    
+    let email: String = (Auth.auth().currentUser?.email)!
+    
+    var fontSize: CGFloat!
+    
+    var darkOn: String!
     
     var task_refs: NSArray = []
     var tasks: [String] = []
@@ -32,6 +40,32 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         myTableView.delegate = self
         
         roomLabel.text = roomName
+        
+        let docRef2 = db.collection("users").document("\(email)")
+        
+        docRef2.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if let fontFloat = (data["fontSize"] as? NSString)?.doubleValue {
+                            self.fontSize = CGFloat(Int(fontFloat))
+                            self.updateFonts()
+                            self.myTableView.reloadData()
+                        }
+                        
+                        if let darkValue = (data["darkOn"] as? NSString){
+                            self.darkOn = String(darkValue)
+                            self.updateScreen()
+                            self.myTableView.reloadData()
+                        }
+                    }
+                }
+        }
         
         let docRef = db.collection("rooms").document("\(roomName)")
         
@@ -56,6 +90,8 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
         }
         
+        roomLabelSize = roomLabel.font.pointSize
+        
         scheduledTimerWithTimeInterval()
     }
     
@@ -66,6 +102,30 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func getTasks(){
         
         let room: String = roomName
+        
+        let docRef2 = db.collection("users").document("\(email)")
+        
+        docRef2.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if let fontFloat = (data["fontSize"] as? NSString)?.doubleValue {
+                            self.fontSize = CGFloat(Int(fontFloat))
+                            self.updateFonts()
+                        }
+                        
+                        if let darkValue = (data["darkOn"] as? NSString){
+                            self.darkOn = String(darkValue)
+                            self.updateScreen()
+                        }
+                    }
+                }
+        }
         
         let docRef = db.collection("rooms").document("\(room)")
         
@@ -94,6 +154,26 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func updateFonts(){
+        
+        roomLabel.font = roomLabel.font.withSize(CGFloat(roomLabelSize * (fontSize/10)))
+        
+    }
+    
+    func updateScreen(){
+        
+        if (darkOn == "true"){
+            
+            overrideUserInterfaceStyle = .dark
+            
+        } else if (darkOn == "false"){
+            
+            overrideUserInterfaceStyle = .light
+
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
@@ -102,13 +182,12 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
         let row = indexPath.row
         cell.textLabel?.text = tasks[row]
+        cell.textLabel?.font = cell.textLabel?.font.withSize(CGFloat(roomLabelSize * (fontSize/10)))
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
-        
+                
         let room: String = roomName
         let taskRef = db.collection("rooms").document("\(room)")
         
@@ -116,7 +195,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let tempArray = NSArray(array: tasks)
         
-        taskRef.setData([
+        taskRef.updateData([
             "tasks": tempArray
         ])
 
@@ -135,7 +214,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let tempArray = NSArray(array: tasks)
             
-            taskRef.setData([
+            taskRef.updateData([
                 "tasks": tempArray
             ])
             

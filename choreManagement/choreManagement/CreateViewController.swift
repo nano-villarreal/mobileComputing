@@ -23,13 +23,19 @@ class CreateViewController: UIViewController {
     
     var darkOn: String!
     
-    @IBOutlet weak var yourNameLabel: UILabel!
+    var room_refs: NSArray = []
+    var rooms: [String] = []
+    
+    @IBOutlet weak var roomNameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var confirmField: UITextField!
+    
+    
     @IBOutlet weak var roomInfoLabel: UILabel!
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var confirmPWLabel: UILabel!
     
-    var yourNameSize: CGFloat!
     var roomInfoSize: CGFloat!
     var roomNameSize: CGFloat!
     var passwordSize: CGFloat!
@@ -63,7 +69,6 @@ class CreateViewController: UIViewController {
                 }
         }
         
-        yourNameSize = yourNameLabel.font.pointSize
         roomInfoSize = roomInfoLabel.font.pointSize
         roomNameSize = roomNameLabel.font.pointSize
         passwordSize = passwordLabel.font.pointSize
@@ -106,7 +111,6 @@ class CreateViewController: UIViewController {
     
     func updateFonts(){
         
-        yourNameLabel.font = yourNameLabel.font.withSize(CGFloat(yourNameSize * (fontSize/10)))
         roomNameLabel.font = roomNameLabel.font.withSize(CGFloat(roomNameSize * (fontSize/10)))
         roomInfoLabel.font = roomInfoLabel.font.withSize(CGFloat(roomInfoSize * (fontSize/10)))
         passwordLabel.font = passwordLabel.font.withSize(CGFloat(passwordSize * (fontSize/10)))
@@ -114,7 +118,6 @@ class CreateViewController: UIViewController {
     }
     
     func updateScreen(){
-        
         
         if (darkOn == "true"){
             
@@ -127,5 +130,53 @@ class CreateViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func createRoom(_ sender: Any) {
+        
+        db.collection("rooms").document("\(roomNameField.text!)").setData([
+            "password": "\(passwordField.text!)",
+            "roomName": "\(roomNameField.text!)",
+            "roomates": ["\((Auth.auth().currentUser?.email)!)"],
+            "tasks": []
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        db.collection("users").document("\((Auth.auth().currentUser?.email)!)").getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        
+                        
+                        if let roomsList = (data["rooms"] as? NSArray){
+                            self.room_refs = roomsList
+                            let objCArray = NSMutableArray(array: self.room_refs)
+
+                            self.rooms = (objCArray as NSArray as? [String])!
+                        }
+                    }
+                }
+        }
+        
+        let roomName: String = roomNameField.text!
+        rooms.append(roomName)
+        
+        let tempArray = NSArray(array: rooms)
+        
+        db.collection("users").document("\((Auth.auth().currentUser?.email)!)").updateData([
+            "rooms": tempArray
+        ])
+        
+    }
+    
 
 }

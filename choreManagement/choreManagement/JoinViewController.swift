@@ -23,16 +23,28 @@ class JoinViewController: UIViewController {
     
     var darkOn: String!
     
+    var checkPW: String!
+    
     @IBOutlet weak var roomInfoLabel: UILabel!
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var joinedLabel: UILabel!
+    
+    @IBOutlet weak var roomNameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
     var roomInfoSize: CGFloat!
     var roomNameSize: CGFloat!
     var passwordSize: CGFloat!
+    var joinedSize: CGFloat!
+    
+    var room_refs: NSArray = []
+    var rooms: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        joinedLabel.isHidden = true
 
         let docRef = db.collection("users").document("\(email)")
         
@@ -54,6 +66,13 @@ class JoinViewController: UIViewController {
                             self.darkOn = String(darkValue)
                             self.updateScreen()
                         }
+                        
+                        if let roomList = (data["rooms"] as? NSArray){
+                            self.room_refs = roomList
+                            let objCArray = NSMutableArray(array: self.room_refs)
+
+                            self.rooms = (objCArray as NSArray as? [String])!
+                        }
                     }
                 }
         }
@@ -61,13 +80,14 @@ class JoinViewController: UIViewController {
         roomInfoSize = roomInfoLabel.font.pointSize
         roomNameSize = roomNameLabel.font.pointSize
         passwordSize = passwordLabel.font.pointSize
+        joinedSize = joinedLabel.font.pointSize
         
         scheduledTimerWithTimeInterval()
         
     }
     
     func scheduledTimerWithTimeInterval(){
-        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.newSettings), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.newSettings), userInfo: nil, repeats: true)
     }
     
     @objc func newSettings(){
@@ -94,6 +114,44 @@ class JoinViewController: UIViewController {
                     }
                 }
         }
+        
+        if (passwordField.text == checkPW){
+            
+            db.collection("users").document("\((Auth.auth().currentUser?.email)!)").getDocument { (document, error) in
+                    guard error == nil else {
+                        print("error", error ?? "")
+                        return
+                    }
+
+                    if let document = document, document.exists {
+                        let data = document.data()
+                        if let data = data {
+                            
+                            
+                            if let roomsList = (data["rooms"] as? NSArray){
+                                self.room_refs = roomsList
+                                let objCArray = NSMutableArray(array: self.room_refs)
+
+                                self.rooms = (objCArray as NSArray as? [String])!
+                            }
+                        }
+                    }
+            }
+            
+            let roomName: String = roomNameField.text!
+            rooms.append(roomName)
+            
+            let tempArray = NSArray(array: rooms)
+            
+            db.collection("users").document("\((Auth.auth().currentUser?.email)!)").updateData([
+                "rooms": tempArray
+            ])
+            
+            joinedLabel.isHidden = false
+            checkPW = ""
+            
+        }
+        
     }
     
     func updateFonts(){
@@ -101,6 +159,7 @@ class JoinViewController: UIViewController {
         roomNameLabel.font = roomNameLabel.font.withSize(CGFloat(roomNameSize * (fontSize/10)))
         roomInfoLabel.font = roomInfoLabel.font.withSize(CGFloat(roomInfoSize * (fontSize/10)))
         passwordLabel.font = passwordLabel.font.withSize(CGFloat(passwordSize * (fontSize/10)))
+        joinedLabel.font = joinedLabel.font.withSize(CGFloat(joinedSize * (fontSize/10)))
     }
     
     func updateScreen(){
@@ -117,5 +176,27 @@ class JoinViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func joinPressed(_ sender: Any) {
+        
+        print(rooms)
+        
+        let docRef = db.collection("rooms").document("\((roomNameField.text)!)")
 
+        docRef.getDocument { (document, error) in
+            guard error == nil else {
+                print("error", error ?? "")
+                return
+            }
+
+            if let document = document, document.exists {
+                let data = document.data()
+                if let data = data {
+                    if let password = (data["password"] as? String){
+                        self.checkPW = password
+                    }
+                }
+            }
+        }
+    }
 }
