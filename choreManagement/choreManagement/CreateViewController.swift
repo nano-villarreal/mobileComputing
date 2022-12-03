@@ -68,6 +68,14 @@ class CreateViewController: UIViewController {
                             self.darkOn = String(darkValue)
                             self.updateScreen()
                         }
+                        
+                        if let roomList = (data["rooms"] as? NSArray){
+                            self.room_refs = roomList
+                            
+                            let objCArray = NSMutableArray(array: self.room_refs)
+
+                            self.rooms = (objCArray as NSArray as? [String])!
+                        }
                     }
                 }
         }
@@ -171,8 +179,9 @@ class CreateViewController: UIViewController {
         }
         
         let roomName: String = roomNameField.text!
+        print(rooms)
         rooms.append(roomName)
-        
+        print(rooms)
         let tempArray = NSArray(array: rooms)
         
         db.collection("users").document("\((Auth.auth().currentUser?.email)!)").updateData([
