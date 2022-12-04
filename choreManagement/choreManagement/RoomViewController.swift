@@ -214,14 +214,6 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
             }))
         present(controller, animated: true)
         
-        
-//        tasks.remove(at: indexPath.row)
-//
-//        let tempArray = NSArray(array: tasks)
-//
-//        taskRef.updateData([
-//            "tasks": tempArray
-//        ])
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
