@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import CoreData
+import SwiftUI
 
 class RoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -237,5 +238,43 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
     }
+    
+    
+    
+    struct Task {
+      let title: String
+      let user: String
+    }
+    
+    var taskList = [
+        Task(title: "Wash Dishes", user: "Jeff"),
+        Task(title: "Vacuum Carpet ", user: "Ray"),
+        Task(title: "Clean Sink", user: "Steve"),
+        Task(title: "tell neighbors to stfu", user: "Will")
+    ]
+    
+    @IBSegueAction func tasksCompleted(_ coder: NSCoder) -> UIViewController? {
+        let listView = ListView(taskList: taskList)
+        return UIHostingController(coder: coder, rootView: listView)
+    }
+  
+    
+    struct ListView: View {
+        var tasks: [Task]
+        init(taskList: [Task]) {
+               self.tasks = taskList
+           }
+        
+        var body: some View {
+            List(tasks, id: \.title) { task in
+               HStack {
+                 Text(task.title)
+                 Text("done by")
+                 Text(task.user)
+               }
+            }.navigationBarTitle("Completed Task List")
+        }
+    }
+    
     
 }

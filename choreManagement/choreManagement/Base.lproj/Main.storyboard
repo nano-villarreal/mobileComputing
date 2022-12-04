@@ -531,6 +531,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YnY-2l-lwH">
+                                <rect key="frame" x="67" y="775" width="261" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="See all completed tasks"/>
+                                <connections>
+                                    <segue destination="jDN-e1-bHl" kind="show" identifier="TasksCompleted" destinationCreationSelector="tasksCompleted:" id="rNy-SM-Ib0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eyJ-rz-YgE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -545,6 +554,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8f-5N-blh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3720" y="817.53554502369661"/>
+        </scene>
+        <!--Hosting Controller-->
+        <scene sceneID="u5M-tY-Bne">
+            <objects>
+                <hostingController id="jDN-e1-bHl" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="1vL-kf-9Wf"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pbd-ed-UEF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4611" y="818"/>
         </scene>
     </scenes>
     <resources>
