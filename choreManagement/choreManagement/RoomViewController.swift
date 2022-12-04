@@ -191,13 +191,37 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         let room: String = roomName
         let taskRef = db.collection("rooms").document("\(room)")
         
-        tasks.remove(at: indexPath.row)
+        let controller = UIAlertController(
+            title: "Would you like to complete this task?",
+            message: "Click OK to complete ",
+            preferredStyle: .alert)
+        controller.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel))
+        controller.addAction(UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: {
+                (paramAction:UIAlertAction!) in
+                    self.tasks.remove(at: indexPath.row)
+                    
+                    let tempArray = NSArray(array: self.tasks)
+                    
+                    taskRef.updateData([
+                        "tasks": tempArray
+                    ])
+                    print("completed task")
+            }))
+        present(controller, animated: true)
         
-        let tempArray = NSArray(array: tasks)
         
-        taskRef.updateData([
-            "tasks": tempArray
-        ])
+//        tasks.remove(at: indexPath.row)
+//
+//        let tempArray = NSArray(array: tasks)
+//
+//        taskRef.updateData([
+//            "tasks": tempArray
+//        ])
 
         tableView.deselectRow(at: indexPath, animated: true)
     }

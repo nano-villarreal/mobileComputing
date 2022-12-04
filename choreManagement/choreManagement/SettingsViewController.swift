@@ -19,7 +19,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var notificationsSwitch: UISwitch!
     @IBOutlet weak var fontSizeSlider: UISlider!
-    
     @IBOutlet weak var settingsLabel: UILabel!
     @IBOutlet weak var darkModeLabel: UILabel!
     @IBOutlet weak var notiLabel: UILabel!
