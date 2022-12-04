@@ -150,6 +150,16 @@ class JoinViewController: UIViewController {
                 "rooms": tempArray
             ])
             
+            if notificationsOn{
+                let content = UNMutableNotificationContent()
+                content.title = "You have joined a room"
+                content.body = "Now joining \(self.roomNameField.text ?? "") "
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 8.0, repeats: false)
+                let request = UNNotificationRequest(identifier: "myJoinNotification", content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request)
+                print("Notifying")
+            }
+           
             joinedLabel.isHidden = false
             checkPW = ""
             

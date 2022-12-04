@@ -10,6 +10,8 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+var notificationsOn:Bool = true
+
 class SettingsViewController: UIViewController {
     
     let db = Firestore.firestore()
@@ -65,6 +67,7 @@ class SettingsViewController: UIViewController {
                 }
         }
         
+        notificationsSwitch.isOn = notificationsOn
         settingsLabelSize = settingsLabel.font.pointSize
         darkModeLabelSize = darkModeLabel.font.pointSize
         notiLabelSize = notiLabel.font.pointSize
@@ -140,5 +143,9 @@ class SettingsViewController: UIViewController {
         
     }
     
+    
+    @IBAction func notificationsToggled(_ sender: Any) {
+        notificationsOn = (notificationsSwitch.isOn)
+    }
     
 }
