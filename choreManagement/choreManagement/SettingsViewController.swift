@@ -63,6 +63,10 @@ class SettingsViewController: UIViewController {
                             self.darkOn = String(darkValue)
                             self.updateScreen()
                         }
+                        if let notiValue = (data["notiOn"] as? NSString){
+                            notificationsOn = Bool(String(notiValue))!
+                            self.updateScreen()
+                        }
                     }
                 }
         }
@@ -111,6 +115,8 @@ class SettingsViewController: UIViewController {
 
         }
         
+        notificationsSwitch.isOn = notificationsOn
+        
     }
     
     @IBAction func darkModeSwitched(_ sender: Any) {
@@ -145,7 +151,32 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func notificationsToggled(_ sender: Any) {
-        notificationsOn = (notificationsSwitch.isOn)
+        
+        let docRef = db.collection("users").document("\(email)")
+        
+        docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if let notiOn = (data["notiOn"] as? NSString) {
+                            if (notiOn == "true"){
+                                self.db.collection("users").document("\(self.email)").setData(["notiOn": "false"], merge: true)
+                                notificationsOn = false
+                                self.updateScreen()
+                            } else if (notiOn == "false"){
+                                self.db.collection("users").document("\(self.email)").setData(["notiOn": "true"], merge: true)
+                                notificationsOn = true
+                                self.updateScreen()
+                            }
+                        }
+                    }
+                }
+        }
     }
     
 }
