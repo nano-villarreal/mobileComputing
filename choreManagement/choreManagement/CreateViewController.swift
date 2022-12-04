@@ -154,6 +154,19 @@ class CreateViewController: UIViewController {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
+                let content = UNMutableNotificationContent()
+                content.title = "You have created a new room"
+                content.body = "Now joining \(self.roomNameField.text ?? "") "
+                
+                // create trigger
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 8.0, repeats: false)
+                
+                // combine it all into a request
+                let request = UNNotificationRequest(identifier: "myNotification", content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request)
+                print("Notifying")
+            
             }
         }
         
