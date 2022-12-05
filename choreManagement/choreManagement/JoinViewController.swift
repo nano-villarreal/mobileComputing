@@ -157,7 +157,7 @@ class JoinViewController: UIViewController {
                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 8.0, repeats: false)
                 let request = UNNotificationRequest(identifier: "myJoinNotification", content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request)
-                print("Notifying")
+                print("Notifying Join")
             }
            
             joinedLabel.isHidden = false

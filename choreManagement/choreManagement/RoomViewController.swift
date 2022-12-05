@@ -238,7 +238,7 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd/MM/yyyy"
                 print(dateFormatter.string(from: date))
-                self.completed_tasks.append("\(compTask) completed by \(self.email) at \(dateFormatter.string(from: date))")
+                self.completed_tasks.append("\(compTask) completed by \(self.email) on \(dateFormatter.string(from: date))")
                     let tempCompleted = NSArray(array: self.completed_tasks)
                     print(tempCompleted) 
                     taskRef.updateData([

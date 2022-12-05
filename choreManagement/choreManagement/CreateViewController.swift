@@ -163,7 +163,7 @@ class CreateViewController: UIViewController {
                     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 8.0, repeats: false)
                     let request = UNNotificationRequest(identifier: "myCreateNotification", content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request)
-                    print("Notifying")
+                    print("Notifying Create")
                 }
                 
             
