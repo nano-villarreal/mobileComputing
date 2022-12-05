@@ -92,9 +92,8 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                         if let completedTaskList = (data["completed_tasks"] as? NSArray){
                             self.completed_task_refs = completedTaskList
-                            let objCArray = NSMutableArray(array: self.completed_task_refs)
-
-                            self.completed_tasks = (objCArray as NSArray as? [String])!
+                            let objArray = NSMutableArray(array: self.completed_task_refs)
+                            self.completed_tasks = (objArray as NSArray as? [String])!
                         }
                     }
                 }
@@ -158,6 +157,23 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
                             
                             self.myTableView.reloadData()
                         }
+                        if let taskList = (data["tasks"] as? NSArray){
+                            self.task_refs = taskList
+                            let objCArray = NSMutableArray(array: self.task_refs)
+                            
+                            self.tasks = (objCArray as NSArray as? [String])!
+                            
+                            self.myTableView.reloadData()
+                            
+                        }
+                      
+                        if let completedTaskList = (data["completed_tasks"] as? NSArray){
+                            self.completed_task_refs = completedTaskList
+                            let objArray = NSMutableArray(array: self.completed_task_refs)
+                            self.completed_tasks = (objArray as NSArray as? [String])!
+                            self.myTableView.reloadData()
+                        }
+
                     }
                 }
         }
@@ -224,10 +240,11 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(dateFormatter.string(from: date))
                 self.completed_tasks.append("\(compTask) completed by \(self.email) at \(dateFormatter.string(from: date))")
                     let tempCompleted = NSArray(array: self.completed_tasks)
-                    print(type(of: tempCompleted))
-                print(tempCompleted)
+                    print(tempCompleted) 
                     taskRef.updateData([
-                        "tasks": tempArray,
+                        "tasks": tempArray
+                    ])
+                    taskRef.updateData([
                         "completed_tasks": tempCompleted
                     ])
                     print("completed task")
