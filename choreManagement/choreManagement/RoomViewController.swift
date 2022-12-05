@@ -44,6 +44,9 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         myTableView.delegate = self
         
         roomLabel.text = roomName
+        let swipeRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(recognizeSwipeGesture(recognizer:)))
+        swipeRecognizerLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeRecognizerLeft)
         
         let docRef2 = db.collection("users").document("\(email)")
         
@@ -275,20 +278,16 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    
-    
-    struct Task {
-      let title: String
-      let user: String
+    @IBAction func recognizeSwipeGesture(recognizer: UISwipeGestureRecognizer) {
+        if recognizer.direction == UISwipeGestureRecognizer.Direction.left {
+            self.performSegue(withIdentifier: "HostingController", sender: nil)
+        }
     }
     
-  
-    
-    @IBSegueAction func tasksCompleted(_ coder: NSCoder) -> UIViewController? {
+    @IBSegueAction func seeAllCompletedTasks(_ coder: NSCoder) -> UIViewController? {
         let listView = ListView(taskList: self.completed_tasks)
         return UIHostingController(coder: coder, rootView: listView)
     }
-  
     
     struct ListView: View {
         var tasks: [String]
@@ -298,8 +297,10 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         var body: some View {
             List(tasks, id: \.self) { task in
-                 Text(task)
+                Text(task).padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 0))
                }.navigationBarTitle("Completed Task List")
+            
+        
         }
     }
     
