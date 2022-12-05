@@ -35,6 +35,9 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
     var task_refs: NSArray = []
     var tasks: [String] = []
     
+    var completed_task_refs: NSArray = []
+    var completed_tasks:  [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.dataSource = self
@@ -86,6 +89,12 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let objCArray = NSMutableArray(array: self.task_refs)
 
                             self.tasks = (objCArray as NSArray as? [String])!
+                        }
+                        if let completedTaskList = (data["completed_tasks"] as? NSArray){
+                            self.completed_task_refs = completedTaskList
+                            let objCArray = NSMutableArray(array: self.completed_task_refs)
+
+                            self.completed_tasks = (objCArray as NSArray as? [String])!
                         }
                     }
                 }
@@ -204,12 +213,22 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
             style: .default,
             handler: {
                 (paramAction:UIAlertAction!) in
+                    let compTask = self.tasks[indexPath.row]
                     self.tasks.remove(at: indexPath.row)
                     
                     let tempArray = NSArray(array: self.tasks)
-                    
+                print(type(of:tempArray))
+                let date = Date()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd/MM/yyyy"
+                print(dateFormatter.string(from: date))
+                self.completed_tasks.append("\(compTask) completed by \(self.email) at \(dateFormatter.string(from: date))")
+                    let tempCompleted = NSArray(array: self.completed_tasks)
+                    print(type(of: tempCompleted))
+                print(tempCompleted)
                     taskRef.updateData([
-                        "tasks": tempArray
+                        "tasks": tempArray,
+                        "completed_tasks": tempCompleted
                     ])
                     print("completed task")
             }))
@@ -246,35 +265,27 @@ class RoomViewController: UIViewController, UITableViewDelegate, UITableViewData
       let user: String
     }
     
-    var taskList = [
-        Task(title: "Wash Dishes", user: "Jeff"),
-        Task(title: "Vacuum Carpet ", user: "Ray"),
-        Task(title: "Clean Sink", user: "Steve"),
-        Task(title: "tell neighbors to stfu", user: "Will")
-    ]
+  
     
     @IBSegueAction func tasksCompleted(_ coder: NSCoder) -> UIViewController? {
-        let listView = ListView(taskList: taskList)
+        let listView = ListView(taskList: self.completed_tasks)
         return UIHostingController(coder: coder, rootView: listView)
     }
   
     
     struct ListView: View {
-        var tasks: [Task]
-        init(taskList: [Task]) {
+        var tasks: [String]
+        init(taskList: [String]) {
                self.tasks = taskList
            }
         
         var body: some View {
-            List(tasks, id: \.title) { task in
-               HStack {
-                 Text(task.title)
-                 Text("done by")
-                 Text(task.user)
-               }
-            }.navigationBarTitle("Completed Task List")
+            List(tasks, id: \.self) { task in
+                 Text(task)
+               }.navigationBarTitle("Completed Task List")
         }
     }
+    
     
     
 }

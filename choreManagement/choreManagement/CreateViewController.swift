@@ -148,7 +148,8 @@ class CreateViewController: UIViewController {
             "password": "\(passwordField.text!)",
             "roomName": "\(roomNameField.text!)",
             "roomates": ["\((Auth.auth().currentUser?.email)!)"],
-            "tasks": []
+            "tasks": [],
+            "completed_tasks": []
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
